@@ -31,8 +31,7 @@ public class TicTacToe {
 		//inp.close();
 		TicTacToe.placeSymbol(choice,gameBoard,"player"); 
 		
-		if(TicTacToe.resultOccurred()){
-		 TicTacToe.printBoard(gameBoard);
+		if(TicTacToe.resultOccurred(gameBoard)){
 		 break;
 		}
 		
@@ -40,21 +39,23 @@ public class TicTacToe {
 		int computerChoice = rand.nextInt(9) + 1;
 		
 		while(playerPositions.contains(computerChoice) || computerPositions.contains(computerChoice)){
-	      computerChoice = inp.nextInt();
+	      computerChoice = rand.nextInt(9) + 1;
 	    }
 		
 		TicTacToe.placeSymbol(computerChoice,gameBoard,"computer");
-	    TicTacToe.printBoard(gameBoard);
 	   
-	    if(TicTacToe.resultOccurred()){
+	    if(TicTacToe.resultOccurred(gameBoard)){
 		 break;
 		} 
-		 
+	    
+	    TicTacToe.printBoard(gameBoard);
 	   }
 	    System.out.println("\n Hope you enjoyed the game..");
 	}
 	
 	private static void printBoard(char[][] board) {
+		
+		System.out.println();
 		for(char[] row: board) {
 			for(char column : row) {
 				System.out.print(column + " ");
@@ -63,11 +64,12 @@ public class TicTacToe {
 		}
 	}
 	
-	private static boolean resultOccurred(){
+	private static boolean resultOccurred(char[][] board){
 	
 	 String result = TicTacToe.performGameLogic();
 		
 		if(result != null){
+			TicTacToe.printBoard(board);
 	        System.out.println(result);
 	        return true;
 	     }
