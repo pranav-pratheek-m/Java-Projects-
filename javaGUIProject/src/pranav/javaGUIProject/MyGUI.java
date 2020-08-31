@@ -16,20 +16,23 @@ public class MyGUI implements ActionListener {
 	int count;
 	JFrame  frame;
 	JPanel panel;
-	JButton button;
+	JButton clickButton,resetButton;
 	JLabel label;
 	
 	public MyGUI() {
 		frame = new JFrame();
 		panel = new JPanel();
-		button = new JButton("Click me!!");
+		clickButton = new JButton("Click me!!");
+		resetButton = new JButton("Reset");
 		label = new JLabel("No of times Clicked: 0");
 		
-		button.addActionListener(this);
+		clickButton.addActionListener(this);
+		resetButton.addActionListener(this);
 		
 		panel.setBorder(BorderFactory.createEmptyBorder(30,30,10,30));
 		panel.setLayout(new GridLayout(0,1));
-		panel.add(button);
+		panel.add(clickButton);
+		panel.add(resetButton);
 		panel.add(label);
 		
 		frame.add(panel,BorderLayout.CENTER);
@@ -46,7 +49,14 @@ public class MyGUI implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		count++;
-		label.setText("No of times Clicked: " + count);
+		
+		if(e.getSource() == clickButton) {
+			count++;
+			label.setText("No of times Clicked: " + count);	
+		}
+		else if(e.getSource() == resetButton) {
+            count = 0;
+            label.setText("No of times Clicked: 0");
+		}
 	}
 }
