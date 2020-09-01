@@ -18,7 +18,7 @@ public class LoginGUI implements ActionListener{
 	private static JTextField usernameField;
 	private static JLabel passwordLabel;
 	private static JPasswordField passwordField;
-	private static JButton loginButton;
+	private static JButton loginButton,resetButton;
 	private static JLabel successLabel;
 	
 	
@@ -54,6 +54,11 @@ public class LoginGUI implements ActionListener{
 		loginButton.addActionListener(new LoginGUI());
 		panel.add(loginButton);
 		
+		resetButton = new JButton("Reset");
+		resetButton.setBounds(120,80,80,25);
+		resetButton.addActionListener(new LoginGUI());
+		panel.add(resetButton);
+		
 		successLabel = new JLabel("");
 		successLabel.setBounds(10,110,300,25);
 		panel.add(successLabel);
@@ -66,13 +71,22 @@ public class LoginGUI implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-       String username = usernameField.getText();
-       String password = passwordField.getText();
-       
-       if(username.equals("PranavMalleboyina") && password.equals("Gre@testPr0grammer")) {
-    	   successLabel.setText("LOGIN IS SUCCESSFUL!!");
-       }else {
-    	   successLabel.setText("INVALID USERNAME OR PASSWORD!!");
-       }		
+		
+		if(e.getSource() == loginButton) {
+			   String username = usernameField.getText();
+		       String password = passwordField.getText();
+		       
+		       if(username.equals("PranavMalleboyina") && password.equals("Gre@testPr0grammer")) {
+		    	   successLabel.setText("LOGIN IS SUCCESSFUL!!");
+		       }else {
+		    	   successLabel.setText("INVALID USERNAME OR PASSWORD!!");
+		       }
+		}else if(e.getSource() == resetButton) {
+			   usernameField.setText("");
+			   passwordField.setText("");
+			   successLabel.setText("");
+		}else {
+			
+		}		
 	}
 }
