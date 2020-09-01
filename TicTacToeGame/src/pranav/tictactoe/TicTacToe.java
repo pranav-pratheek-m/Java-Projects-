@@ -7,6 +7,7 @@ public class TicTacToe {
     static List<Integer> playerPositions = new ArrayList<>();
     static List<Integer> computerPositions = new ArrayList<>();
 	
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		
 		char[][] gameBoard = {{' ','|',' ','|',' '},
@@ -17,12 +18,17 @@ public class TicTacToe {
 				};
 		
 		TicTacToe.printBoard(gameBoard);
-		Scanner inp;
+		Scanner inp = null;
 		 
-		while(true){ 
-		inp = new Scanner(System.in);
+		while(true){
+			try {
+        inp = new Scanner(System.in);
 		System.out.print("Enter your number choice : ");
 		int choice = inp.nextInt();
+		
+		if(choice < 0 || choice > 9) {
+			throw new IllegalArgumentException("\nPlease enter a valid number from 0-9.\n");
+		}
 	
 	    while(playerPositions.contains(choice) || computerPositions.contains(choice)){
 	      System.out.print("\nPosition taken!! Enter a new position: ");
@@ -49,6 +55,15 @@ public class TicTacToe {
 		} 
 	    
 	    TicTacToe.printBoard(gameBoard);
+	   }catch(IllegalArgumentException ex) {
+		   System.out.println(ex.getMessage());
+	     }catch(Exception ex){
+	    	 System.out.println("\nPlease enter integer format only!\n");
+	     }finally {
+	    	 if(inp != null) {
+	    		 //inp.close();
+	    	 }
+	     }
 	   }
 		inp.close();
 	    System.out.println("\nHope you enjoyed the game..");
@@ -151,16 +166,16 @@ public class TicTacToe {
 	  for(List<Integer> triad : winningPositions){
 	  
 	   if(playerPositions.containsAll(triad)){
-	      return "Player has won!!";
+	      return "\nPlayer has won!!";
 	   }
 	   
 	   if(computerPositions.containsAll(triad)){
-	     return "Computer has won!!";
+	     return "\nComputer has won!!";
 	   }
 	}
 	
 	if((playerPositions.size() + computerPositions.size()) == 9 ){
-	   return "The Game is tied!!";
+	   return "\nThe Game is tied!!";
 	}
 	
 	return null;
