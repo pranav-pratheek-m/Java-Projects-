@@ -17,9 +17,10 @@ public class TicTacToe {
 				};
 		
 		TicTacToe.printBoard(gameBoard);
+		Scanner inp;
 		 
 		while(true){ 
-		Scanner inp = new Scanner(System.in);
+		inp = new Scanner(System.in);
 		System.out.print("Enter your number choice : ");
 		int choice = inp.nextInt();
 	
@@ -28,7 +29,6 @@ public class TicTacToe {
 	      choice = inp.nextInt();
 	    }
 		
-		//inp.close();
 		TicTacToe.placeSymbol(choice,gameBoard,"player"); 
 		
 		if(TicTacToe.resultOccurred(gameBoard)){
@@ -50,7 +50,8 @@ public class TicTacToe {
 	    
 	    TicTacToe.printBoard(gameBoard);
 	   }
-	    System.out.println("\n Hope you enjoyed the game..");
+		inp.close();
+	    System.out.println("\nHope you enjoyed the game..");
 	}
 	
 	private static void printBoard(char[][] board) {
